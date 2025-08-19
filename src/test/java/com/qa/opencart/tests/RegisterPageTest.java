@@ -19,6 +19,7 @@ public class RegisterPageTest extends BaseTest {
 		Assert.assertTrue(
 				registerPage.
 					userRegisteration("vishal", "shah", "vishaltest@email.com", "9898989898", "Test@123", "yes"));
+		
 	}
 	
 	
