@@ -9,6 +9,10 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.qa.opencart.base.BaseTest;
+import static com.qa.opencart.constants.AppConstants.*;
+
+import com.qa.opencart.utils.CSVUtil;
+import com.qa.opencart.utils.ExcelUtil;
 
 public class ProductInfoPageTest extends BaseTest {
 	
@@ -47,12 +51,23 @@ public class ProductInfoPageTest extends BaseTest {
 		};
 	}
 	
-	@Test(dataProvider = "getProductImagesTestData")
-	public void productImageCountTest(String searchKey, String productName, int expectedImageCount) {
+	@DataProvider
+	public Object[][] getProductSheetData() {
+		return ExcelUtil.getTestData(PRODUCT_SHEET_NAME);
+	}
+	
+	@DataProvider
+	public Object[][] getProductCSVData() {
+		return CSVUtil.csvData("product");
+	}
+	
+	
+	@Test(dataProvider = "getProductCSVData")
+	public void productImageCountTest(String searchKey, String productName, String expectedImageCount) {
 		searchResultsPage = accPage.doSearch(searchKey);
 		productInfoPage = searchResultsPage.selectProduct(productName);
 		int actImageCount = productInfoPage.getProductImagesCount();
-		Assert.assertEquals(actImageCount, expectedImageCount);
+		Assert.assertEquals(String.valueOf(actImageCount), expectedImageCount);
 	}
 	
 	@Test

@@ -3,8 +3,10 @@ package com.qa.opencart.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+//import com.qa.opencart.constants.AppConstants;
 import static com.qa.opencart.constants.AppConstants.*;
 import com.qa.opencart.utils.ElementUtil;
+import com.qa.opencart.utils.StringUtils;
 
 public class RegisterPage {
 
@@ -36,11 +38,11 @@ public class RegisterPage {
 		eleUtil = new ElementUtil(driver);
 	}
 
-	public boolean userRegisteration(String firstName, String lastName, String email, String telephone, String password, String subscribe) {
+	public boolean userRegisteration(String firstName, String lastName, String telephone, String password, String subscribe) {
 		
 		eleUtil.waitForElementVisible(this.firstName, DEFAULT_TIMEOUT).sendKeys(firstName);
 		eleUtil.doSendKeys(this.lastName, lastName);
-		eleUtil.doSendKeys(this.email, email);
+		eleUtil.doSendKeys(this.email, StringUtils.getRandomEmailId());
 		eleUtil.doSendKeys(this.telephone, telephone);
 		eleUtil.doSendKeys(this.password, password);
 		eleUtil.doSendKeys(this.confirmpassword, password);
@@ -55,7 +57,11 @@ public class RegisterPage {
 		eleUtil.doClick(agreeCheckBox);
 		eleUtil.doClick(continueButton);
 		
-		if(eleUtil.doGetElementText(successMessg).contains(REGISTER_SUCCESS_MESSG)) {
+		// eleUtil.waitForElementsVisible(successMessg, MEDIUM_DEFAULT_TIMEOUT);
+		
+		if(eleUtil.waitForElementVisible(successMessg, MEDIUM_DEFAULT_TIMEOUT).getText().contains(REGISTER_SUCCESS_MESSG)) {
+			eleUtil.doClick(logoutLink);
+			eleUtil.doClick(registerLink);
 			return true;
 		}
 		return false;

@@ -16,7 +16,8 @@ import com.qa.opencart.exceptions.BrowserException;
 public class DriverFactory {
 	
 	WebDriver driver;
-	protected Properties prop;
+	Properties prop;
+	OptionsManager optionsManager;
 	
 	/**
 	 * This method is used to init the driver on the basis of given browser name
@@ -25,18 +26,19 @@ public class DriverFactory {
 	public WebDriver initDriver(Properties prop) {
 		
 		String browserName = prop.getProperty("browser");
-		
 		System.out.println("broswer is: " + browserName);
+		
+		optionsManager = new OptionsManager(prop);
 		
 		switch (browserName.toLowerCase().trim()) {
 		case "chrome":
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(optionsManager.getChromeOptions());
 			break;
 		case "edge":
-			driver = new EdgeDriver();
+			driver = new EdgeDriver(optionsManager.getEdgeOptions());
 			break;
 		case "firefox":
-			driver = new FirefoxDriver();
+			driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
 			break;
 		case "safari":
 			driver = new SafariDriver();
