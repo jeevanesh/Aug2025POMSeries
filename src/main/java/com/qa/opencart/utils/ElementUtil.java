@@ -23,15 +23,18 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.qa.opencart.exceptions.FrameworkException;
+import com.qa.opencart.factory.DriverFactory;
 
 public class ElementUtil {
 
 	private WebDriver driver;
 	private Actions act;
+	private JavaScriptUtil jsUtil;
 
 	public ElementUtil(WebDriver driver) {
 		this.driver = driver;
 		act = new Actions(driver);
+		jsUtil = new JavaScriptUtil(driver);
 	}
 
 	public void doClick(By locator) {
@@ -58,7 +61,15 @@ public class ElementUtil {
 	}
 	
 	public WebElement getElement(By locator) {
-		return driver.findElement(locator);
+		WebElement element = driver.findElement(locator);
+		highlightElement(element);
+		return element;
+	}
+	
+	public void highlightElement(WebElement element) {
+		if(Boolean.parseBoolean(DriverFactory.highlight)) {
+			jsUtil.flash(element);
+		}	
 	}
 
 	public boolean isElementDisplayed(By locator) {
@@ -321,7 +332,9 @@ public class ElementUtil {
 	 */
 	public WebElement waitForElementVisible(By locator, int timeOut) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
-		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		WebElement element =  wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		highlightElement(element);
+		return element;
 	}
 
 	public WebElement waitForElementVisible(By locator, int timeOut, int intervalTime) {

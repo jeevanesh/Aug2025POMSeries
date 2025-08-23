@@ -15,9 +15,9 @@ public class SearchTest extends BaseTest {
 	
 	@Test
 	public void searchTest() {
-		searchResultsPage = accPage.doSearch("airtel");
+		searchResultsPage = accPage.doSearch("samsung");
 		int actResultsCount = searchResultsPage.getResultsProductCount();
-		Assert.assertEquals(actResultsCount, 0);
+		Assert.assertEquals(actResultsCount, 2);
 	}
 	
 	

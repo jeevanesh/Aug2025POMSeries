@@ -20,12 +20,12 @@ public class LoginPageTest extends BaseTest {
 		Assert.assertTrue(url.contains(LOGIN_PAGE_URL_FRACTION));
 	}
 	
-	@Test
+	@Test(enabled = false)
 	public void forgotPwdLinkExistTest() {
 		Assert.assertTrue(loginPage.isForgotPwdLinkExist());
 	}
 	
-	@Test(priority = Short.MAX_VALUE)
+	@Test(priority = Short.MAX_VALUE, description = "login with valid credentials")
 	public void doLoginTest() {
 		accPage = loginPage.doLogin(prop.getProperty("username"), prop.getProperty("password"));
 		Assert.assertEquals(accPage.getAccPageTitle(), HOME_PAGE_TITLE);

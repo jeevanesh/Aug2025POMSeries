@@ -19,6 +19,8 @@ public class DriverFactory {
 	Properties prop;
 	OptionsManager optionsManager;
 	
+	public static String highlight;
+	
 	/**
 	 * This method is used to init the driver on the basis of given browser name
 	 * @param browserName
@@ -29,6 +31,8 @@ public class DriverFactory {
 		System.out.println("broswer is: " + browserName);
 		
 		optionsManager = new OptionsManager(prop);
+		
+		highlight = prop.getProperty("highlight");
 		
 		switch (browserName.toLowerCase().trim()) {
 		case "chrome":
