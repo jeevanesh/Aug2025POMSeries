@@ -51,7 +51,7 @@ public class AccountsPage {
 	
 	public SearchResultsPage doSearch(String searchKey) {
 		System.out.println("search key : " + searchKey);
-		eleUtil.doSendKeys(search, searchKey);
+		eleUtil.doSendKeys(search, searchKey, DEFAULT_TIMEOUT);
 		eleUtil.doClick(searchIcon);
 		return new SearchResultsPage(driver);
 	}

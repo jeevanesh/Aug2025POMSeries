@@ -22,8 +22,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aventstack.chaintest.plugins.ChainTestListener;
 import com.qa.opencart.exceptions.FrameworkException;
 import com.qa.opencart.factory.DriverFactory;
+
+import io.qameta.allure.Step;
 
 public class ElementUtil {
 
@@ -37,6 +40,7 @@ public class ElementUtil {
 		jsUtil = new JavaScriptUtil(driver);
 	}
 
+	@Step("clicking on element: {0}")
 	public void doClick(By locator) {
 		getElement(locator).click();
 	}
@@ -45,6 +49,7 @@ public class ElementUtil {
 		waitForElementVisible(locator, timeOut).click();
 	}
 
+	@Step("entering value: {1} into element: {0}")
 	public void doSendKeys(By locator, String value) {
 		getElement(locator).clear();
 		getElement(locator).sendKeys(value);
@@ -60,7 +65,9 @@ public class ElementUtil {
 		getElement(locator).sendKeys(value);
 	}
 	
+	@Step("getting web element: {0}")
 	public WebElement getElement(By locator) {
+		ChainTestListener.log("Locator is: " + locator.toString());
 		WebElement element = driver.findElement(locator);
 		highlightElement(element);
 		return element;

@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite thread-count="3" parallel="tests" name="Failed suite [OpenCart App Test Regression Suite]" guice-stage="DEVELOPMENT" verbose="3">
-  <test thread-count="3" parallel="tests" name="ProductInfo Page Test(failed)" verbose="3">
+<suite thread-count="1" parallel="tests" name="Failed suite [OpenCart App Test Regression Suite]" guice-stage="DEVELOPMENT" verbose="3">
+  <listeners>
+    <listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
+  </listeners>
+  <test thread-count="1" parallel="tests" name="Login Page Test_chrome(failed)" verbose="3">
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="com.qa.opencart.tests.ProductInfoPageTest">
+      <class name="com.qa.opencart.tests.LoginPageTest">
         <methods>
-          <include name="productInfoSetup"/>
-          <include name="productHeaderTest" invocation-numbers="0"/>
+          <include name="loginPageTitleTest"/>
           <include name="setup"/>
+          <include name="attachScreenshot"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- com.qa.opencart.tests.ProductInfoPageTest -->
+      </class> <!-- com.qa.opencart.tests.LoginPageTest -->
     </classes>
-  </test> <!-- ProductInfo Page Test(failed) -->
+  </test> <!-- Login Page Test_chrome(failed) -->
 </suite> <!-- Failed suite [OpenCart App Test Regression Suite] -->
