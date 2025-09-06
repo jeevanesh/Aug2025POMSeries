@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
 import static com.qa.opencart.constants.AppConstants.*;
-import com.qa.opencart.pages.LoginPage;
 import com.qa.opencart.utils.ExcelUtil;
 
 public class RegisterPageTest extends BaseTest {

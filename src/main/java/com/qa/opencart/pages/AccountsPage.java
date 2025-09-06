@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 
 import com.qa.opencart.utils.ElementUtil;
 
+import io.qameta.allure.Step;
+
 public class AccountsPage {
 	
 	private WebDriver driver;
@@ -25,18 +27,21 @@ public class AccountsPage {
 		eleUtil = new ElementUtil(driver);
 	}
 
+	@Step("getting acc page title")
 	public String getAccPageTitle() {
 		String title = eleUtil.waitForTitleIs(HOME_PAGE_TITLE, DEFAULT_TIMEOUT);
 		System.out.println("Home Page Title: " + title);
 		return title;	
 	}
 	
+	@Step("getting acc page url")
 	public String getAccPageUrl() {
 		String url = eleUtil.waitForURLContains(HOME_PAGE_URL_FRACTION, DEFAULT_TIMEOUT);
 		System.out.println("Accounts page URL: " + url);
 		return url;
 	}
 	
+	@Step("getting acc page headers")
 	public List<String> getAccPageHeaders() {
 		List<WebElement> headerList = eleUtil.getElements(headers);
 		List<String> headerValList = new ArrayList<String>();
@@ -49,6 +54,7 @@ public class AccountsPage {
 		return headerValList;
 	}
 	
+	@Step("perform search: {0}")
 	public SearchResultsPage doSearch(String searchKey) {
 		System.out.println("search key : " + searchKey);
 		eleUtil.doSendKeys(search, searchKey, DEFAULT_TIMEOUT);

@@ -337,6 +337,8 @@ public class ElementUtil {
 	 * @param timeOut
 	 * @return
 	 */
+	
+	@Step("Waiting for element using: {0} and Timeout: {1}")
 	public WebElement waitForElementVisible(By locator, int timeOut) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
 		WebElement element =  wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -419,6 +421,14 @@ public class ElementUtil {
 		return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
 	}
 
+	/**
+	 * An expectation for checking an element is visible and enabled such that you
+	 * can click it.
+	 * @param locator
+	 * @param timeOut
+	 */
+	
+	@Step("clicking on element when it is ready: {0} with timeout: {1}")
 	public void clickWhenReady(By locator, int timeOut) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
 		wait.until(ExpectedConditions.elementToBeClickable(locator)).click();

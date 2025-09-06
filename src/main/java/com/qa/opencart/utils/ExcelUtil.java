@@ -18,9 +18,9 @@ public class ExcelUtil {
 	public static Object[][] getTestData(String sheetName) {
 		Object data[][] = null;
 		try {
-			FileInputStream ip = new FileInputStream(TEST_DATA_SHEET_PATH);
-			book = WorkbookFactory.create(ip);
-			sheet = book.getSheet(sheetName);
+			FileInputStream ip = new FileInputStream(TEST_DATA_SHEET_PATH);  // file input stream to read the file
+			book = WorkbookFactory.create(ip);  // it will check the excel file format whether it is .xls or .xlsx
+			sheet = book.getSheet(sheetName);  // it will get the sheet from the workbook
 
 			data = new Object[sheet.getLastRowNum()][sheet.getRow(0).getLastCellNum()];
 

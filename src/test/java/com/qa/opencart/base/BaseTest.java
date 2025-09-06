@@ -3,9 +3,11 @@ package com.qa.opencart.base;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
@@ -17,6 +19,9 @@ import com.qa.opencart.pages.LoginPage;
 import com.qa.opencart.pages.ProductInfoPage;
 import com.qa.opencart.pages.RegisterPage;
 import com.qa.opencart.pages.SearchResultsPage;
+import com.qa.opencart.utils.LogUtil;
+
+import io.qameta.allure.Description;
 
 //@Listeners(ChainTestListener.class)
 public class BaseTest {
@@ -32,6 +37,7 @@ public class BaseTest {
 	protected ProductInfoPage productInfoPage;
 	protected RegisterPage registerPage;
 	
+	@Description("init the driver and properties")
 	@Parameters({"browser"})
 	@BeforeTest
 	public void setup(String browserName) {
@@ -46,6 +52,11 @@ public class BaseTest {
 		loginPage = new LoginPage(driver);
 	}
 	
+	@BeforeMethod //will be running before each @test method
+	public void beforeMethod(ITestNGMethod result) {
+		LogUtil.info("--------- starting test case ----------" + result.getMethodName());
+	}
+	
 	@AfterMethod //will be running after each @test method
 	public void attachScreenshot(ITestResult result) {
 		if(!result.isSuccess()) { //only for failure test cases -- true
@@ -55,6 +66,7 @@ public class BaseTest {
 		// ChainTestListener.embed(DriverFactory.getScreenshotFile(), "image/png");
 	}
 	
+	@Description("closing the browser...")
 	@AfterTest
 	public void tearDown() {
 		driver.quit();

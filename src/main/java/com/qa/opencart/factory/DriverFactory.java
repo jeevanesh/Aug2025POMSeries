@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,8 @@ import org.openqa.selenium.safari.SafariDriver;
 import com.qa.opencart.exceptions.BrowserException;
 import com.qa.opencart.exceptions.FrameworkException;
 
+import io.qameta.allure.Step;
+
 public class DriverFactory {
 
 	WebDriver driver;
@@ -24,20 +27,24 @@ public class DriverFactory {
 	OptionsManager optionsManager;
 	
 	// ThreadLocal is a class in java which provides thread-local variables.
-	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
-	
-
+	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>(); // to create the local copy of the driver
 	public static String highlight;
+	public static Logger log = Logger.getLogger(DriverFactory.class);  
+	// warn, info, error, fatal
 
 	/**
 	 * This method is used to init the driver on the basis of given browser name
 	 * 
 	 * @param browserName
 	 */
+	@Step("init the driver with properties: {0}")
 	public WebDriver initDriver(Properties prop) {
+		
+		log.info("properties: " + prop);
 
 		String browserName = prop.getProperty("browser");
-		System.out.println("broswer is: " + browserName);
+//		System.out.println("broswer is: " + browserName);
+		log.info("browser name: " + browserName);
 
 		optionsManager = new OptionsManager(prop);
 
@@ -60,9 +67,9 @@ public class DriverFactory {
 			tlDriver.set(new SafariDriver());
 //			driver = new SafariDriver();
 			break;
-
 		default:
-			System.out.println("plz pass the valid browser name " + browserName);
+//			System.out.println("plz pass the valid browser name " + browserName);
+			log.error("plz pass the valid browser name " + browserName);
 			throw new BrowserException("===== INVALID BROWSER =====");
 		}
 
@@ -97,9 +104,13 @@ public class DriverFactory {
 
 		try {
 			if (envName == null) {
+//				System.out.println("No env is given...hence running it on QA env by default...");
+				log.warn("env is null, hence running the tests on QA env by default...");
+				
 				ip = new FileInputStream("./src/test/resources/config/qa.config.properties");
 			} else {
-				System.out.println("Running test on environment: " + envName);
+//				System.out.println("Running tests on environment: " + envName);
+				log.info("Running tests on environment: " + envName);
 
 				switch (envName.toLowerCase().trim()) {
 				case "qa":
@@ -118,6 +129,7 @@ public class DriverFactory {
 					ip = new FileInputStream("./src/test/resources/config/prod.config.properties");
 					break;
 				default:
+					log.error("===== Invalid env name ========== " + envName);
 					throw new FrameworkException("===INVALID ENV NAME==== : " + envName);
 				}
 			}
