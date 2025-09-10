@@ -1,0 +1,19 @@
+2025-09-10 20:48:02 WARN  DriverFactory:109 - env is null, hence running the tests on QA env by default...
+2025-09-10 20:48:02 INFO  DriverFactory:44 - properties: {headless=false, highlight=false, password=Test@123, browser=chrome, incognito=false, url=https://naveenautomationlabs.com/opencart/index.php?route=account/login, username=qatestuser@email.com}
+2025-09-10 20:48:02 INFO  DriverFactory:48 - browser name: chrome
+2025-09-10 20:48:16 INFO  BaseTest:68 - ------ Screenshot is taken ------
+2025-09-10 20:48:17 INFO  AccountsPage:37 - Home Page Title: My Account
+2025-09-10 20:48:18 INFO  BaseTest:81 - -------------- Closing the browser --------------
+2025-09-10 20:48:18 WARN  DriverFactory:109 - env is null, hence running the tests on QA env by default...
+2025-09-10 20:48:18 INFO  DriverFactory:44 - properties: {headless=false, highlight=false, password=Test@123, browser=chrome, incognito=false, url=https://naveenautomationlabs.com/opencart/index.php?route=account/login, username=qatestuser@email.com}
+2025-09-10 20:48:18 INFO  DriverFactory:48 - browser name: chrome
+2025-09-10 20:48:25 INFO  AccountsPage:57 - Acc Page headers: [My Account, My Orders, My Affiliate Account, Newsletter]
+2025-09-10 20:48:25 INFO  AccountsPage:37 - Home Page Title: My Account
+2025-09-10 20:48:26 INFO  AccountsPage:44 - Accounts page URL: https://naveenautomationlabs.com/opencart/index.php?route=account/account
+2025-09-10 20:48:26 INFO  BaseTest:81 - -------------- Closing the browser --------------
+2025-09-10 20:48:26 WARN  DriverFactory:109 - env is null, hence running the tests on QA env by default...
+2025-09-10 20:48:26 INFO  DriverFactory:44 - properties: {headless=false, highlight=false, password=Test@123, browser=chrome, incognito=false, url=https://naveenautomationlabs.com/opencart/index.php?route=account/login, username=qatestuser@email.com}
+2025-09-10 20:48:26 INFO  DriverFactory:48 - browser name: chrome
+2025-09-10 20:48:31 INFO  AccountsPage:64 - search key : samsung
+2025-09-10 20:48:31 INFO  BaseTest:68 - ------ Screenshot is taken ------
+2025-09-10 20:48:32 INFO  BaseTest:81 - -------------- Closing the browser --------------

@@ -2,7 +2,10 @@ package com.qa.opencart.base;
 
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -37,6 +40,8 @@ public class BaseTest {
 	protected ProductInfoPage productInfoPage;
 	protected RegisterPage registerPage;
 	
+	public static final Logger log = LogManager.getLogger(BaseTest.class);
+	
 	@Description("init the driver and properties")
 	@Parameters({"browser"})
 	@BeforeTest
@@ -52,16 +57,19 @@ public class BaseTest {
 		loginPage = new LoginPage(driver);
 	}
 	
-	@BeforeMethod //will be running before each @test method
-	public void beforeMethod(ITestNGMethod result) {
-		LogUtil.info("--------- starting test case ----------" + result.getMethodName());
-	}
+//	@BeforeMethod //will be running before each @test method
+//	public void beforeMethod(ITestContext result) {
+//		LogUtil.info("--------- starting test case ----------" + result.getName());
+//	}
 	
 	@AfterMethod //will be running after each @test method
 	public void attachScreenshot(ITestResult result) {
 		if(!result.isSuccess()) { //only for failure test cases -- true
+			log.info("------ Screenshot is taken ------");
 			ChainTestListener.embed(DriverFactory.getScreenshotFile(), "image/png");
 		}
+		
+//		LogUtil.info("--------- ending test case ----------" + result.getMethod().getMethodName());
 		
 		// ChainTestListener.embed(DriverFactory.getScreenshotFile(), "image/png");
 	}
@@ -70,6 +78,7 @@ public class BaseTest {
 	@AfterTest
 	public void tearDown() {
 		driver.quit();
+		log.info("-------------- Closing the browser --------------");
 	}
 
 }

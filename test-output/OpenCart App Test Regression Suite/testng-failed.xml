@@ -4,7 +4,6 @@
   <listeners>
     <listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
     <listener class-name="com.qa.opencart.listeners.TestAllureListener"/>
-    <listener class-name="com.qa.opencart.listeners.AnnotationTransformer"/>
   </listeners>
   <test thread-count="1" parallel="tests" name="Login Page Test_chrome(failed)" verbose="3">
     <parameter name="browser" value="chrome"/>
@@ -14,10 +13,23 @@
           <include name="loginPageTitleTest"/>
           <include name="setup"/>
           <include name="attachScreenshot"/>
-          <include name="doLoginTest"/>
           <include name="tearDown"/>
         </methods>
       </class> <!-- com.qa.opencart.tests.LoginPageTest -->
     </classes>
   </test> <!-- Login Page Test_chrome(failed) -->
+  <test thread-count="1" parallel="tests" name="Search Test_chrome(failed)" verbose="3">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="com.qa.opencart.tests.SearchTest">
+        <methods>
+          <include name="searchTest"/>
+          <include name="setup"/>
+          <include name="attachScreenshot"/>
+          <include name="searchSetup"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.qa.opencart.tests.SearchTest -->
+    </classes>
+  </test> <!-- Search Test_chrome(failed) -->
 </suite> <!-- Failed suite [OpenCart App Test Regression Suite] -->

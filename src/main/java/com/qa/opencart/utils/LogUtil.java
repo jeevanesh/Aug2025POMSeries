@@ -1,10 +1,11 @@
 package com.qa.opencart.utils;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LogUtil {
 
-	public static Logger log = Logger.getLogger(LogUtil.class);
+	public static final Logger log = LogManager.getLogger(LogUtil.class);
 
 	public static void info(String mesg) {
 		log.info(mesg);

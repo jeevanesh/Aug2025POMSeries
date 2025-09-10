@@ -6,7 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -29,7 +30,7 @@ public class DriverFactory {
 	// ThreadLocal is a class in java which provides thread-local variables.
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>(); // to create the local copy of the driver
 	public static String highlight;
-	public static Logger log = Logger.getLogger(DriverFactory.class);  
+	public static final Logger log = LogManager.getLogger(DriverFactory.class);
 	// warn, info, error, fatal
 
 	/**
